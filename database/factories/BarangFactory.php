@@ -17,15 +17,15 @@ class BarangFactory extends Factory
      */
     public function definition(): array
     {
-        $merk = fake()->word;
+        $merk = fake()->word();
 
         return [
-            'nama' => $merk,
+            'merk' => $merk,
             'slug' => Str::slug($merk),
-            'seri' => fake()->word,
-            'spesifikasi' => fake()->sentence,
+            'seri' => fake()->word(),
+            'spesifikasi' => fake()->sentence(),
             'kategori_id' => rand(1, 4),
-            'stok' => fake()->randomNumber(),
+            'stok' => 1,
         ];
-    }
+    }   
 }
