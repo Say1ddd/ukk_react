@@ -14,6 +14,7 @@ class KategoriController extends Controller
     public function index()
     {
         $kategoris = Kategori::get();
+
         return Inertia::render('Kategori/Index', [
             'kategoris' => $kategoris
         ]);
@@ -24,7 +25,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Kategori/Create');
     }
 
     /**
@@ -32,7 +33,15 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'slug' => 'required',
+            'deskripsi' => 'required',
+            'kategori' => 'required',
+        ]);
+
+        Kategori::create($request->all());
+
+        return redirect()->route('kategori.index');
     }
 
     /**
@@ -40,7 +49,9 @@ class KategoriController extends Controller
      */
     public function show(Kategori $kategori)
     {
-        //
+        return Inertia::render('Kategori/Show', [
+            'kategori' => $kategori
+        ]);
     }
 
     /**
@@ -48,7 +59,9 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        //
+        return Inertia::render('Kategori/Edit', [
+            'kategori' => $kategori
+        ]);
     }
 
     /**
@@ -56,7 +69,15 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-        //
+        $request->validate([
+            'slug' => 'required',
+            'deskripsi' => 'required',
+            'kategori' => 'required',
+        ]);
+
+        $kategori->update($request->all());
+
+        return redirect()->route('kategori.index');
     }
 
     /**
@@ -64,6 +85,8 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        //
+        $kategori->delete();
+
+        return redirect()->route('kategori.index');
     }
 }
