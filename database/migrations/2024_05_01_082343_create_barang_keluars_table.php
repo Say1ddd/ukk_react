@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('barang_keluar', function (Blueprint $table) {
             $table->id();
-            $table->date('tgl_keluar');
-            $table->smallInteger('qty_keluar')->default('1');
-            $table->foreignId('barang_id')->cascadeOnDelete();
+            $table->date('tanggal_keluar');
+            $table->unsignedSmallInteger('jumlah');
+            $table->foreignId('barang_id')->cascadeOnUpdate()->restrictOnDelete();
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('barang_keluars');
+        Schema::dropIfExists('barang_keluar');
     }
 };
