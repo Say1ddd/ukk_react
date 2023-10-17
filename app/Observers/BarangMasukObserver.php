@@ -2,7 +2,9 @@
 
 namespace App\Observers;
 
+use App\Models\Barang;
 use App\Models\BarangMasuk;
+use Illuminate\Support\Facades\DB;
 
 class BarangMasukObserver
 {
@@ -11,7 +13,11 @@ class BarangMasukObserver
      */
     public function created(BarangMasuk $barangMasuk): void
     {
-        //
+        DB::transaction(function () use ($barangMasuk) {
+            $barang = Barang::find($barangMasuk->barang_id);
+            $barang->stok += $barangMasuk->jumlah;
+            $barang->save();
+        });
     }
 
     /**
@@ -19,7 +25,12 @@ class BarangMasukObserver
      */
     public function updated(BarangMasuk $barangMasuk): void
     {
-        //
+        DB::transaction(function () use ($barangMasuk) {
+            $newMasuk = $barangMasuk->jumlah - $barangMasuk->getOriginal('jumlah');
+            $barang = Barang::find($barangMasuk->barang_id);
+            $barang->stok += $newMasuk;
+            $barang->save();
+        });
     }
 
     /**
@@ -27,7 +38,11 @@ class BarangMasukObserver
      */
     public function deleted(BarangMasuk $barangMasuk): void
     {
-        //
+        DB::transaction(function () use ($barangMasuk) {
+            $barang = Barang::find($barangMasuk->barang_id);
+            $barang->stok -= $barangMasuk->jumlah;
+            $barang->save();
+        });
     }
 
     /**
