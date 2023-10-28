@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use function Pest\Laravel\from;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BarangMasuk>
  */
@@ -18,8 +20,8 @@ class BarangMasukFactory extends Factory
     {
         return [
             'tanggal_masuk' => now(),
-            'jumlah' => 1,
-            'barang_id' => rand(1, 10),
+            'jumlah' => 100,
+            'barang_id' => 1
         ];
     }
 }
