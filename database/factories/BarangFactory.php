@@ -24,8 +24,7 @@ class BarangFactory extends Factory
             'slug' => Str::slug($merk),
             'seri' => fake()->word(),
             'spesifikasi' => fake()->sentence(),
-            'kategori_id' => rand(1, 4),
-            'stok' => 1,
+            'kategori_id' => 1,
         ];
     }   
 }
