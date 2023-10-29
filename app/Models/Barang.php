@@ -25,5 +25,10 @@ class Barang extends Model
         return $this->belongsTo(Kategori::class);
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     use HasFactory;
 }
