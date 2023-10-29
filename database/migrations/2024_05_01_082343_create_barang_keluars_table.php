@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal_keluar');
             $table->unsignedSmallInteger('jumlah');
-            $table->foreignId('barang_id')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('barang_id')->constrained('barang')->cascadeOnUpdate()->restrictOnDelete();
             $table->timestamps();
         });
     }
