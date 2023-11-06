@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
             KategoriSeeder::class,
         ]);
 
-        Barang::factory(5)->create();
-        BarangMasuk::factory(5)->create();
-        BarangKeluar::factory(5)->create();
+        Barang::factory()->create();
+        BarangMasuk::factory()->create();
+        BarangKeluar::factory()->create();
 
         // User::factory(10)->create();
 
