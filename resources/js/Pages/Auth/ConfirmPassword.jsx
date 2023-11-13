@@ -28,7 +28,7 @@ export default function ConfirmPassword() {
             <Head title="Confirm Password" />
 
             <div className="mb-4 text-sm text-gray-600">
-                This is a secure area of the application. Please confirm your password before continuing.
+                Harap konfirmasi kata sandi Anda untuk melanjutkan.
             </div>
 
             <form onSubmit={submit}>
@@ -49,8 +49,8 @@ export default function ConfirmPassword() {
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Confirm
+                    <PrimaryButton className="ms-4 rounded-full" disabled={processing}>
+                        Konfirmasi
                     </PrimaryButton>
                 </div>
             </form>
