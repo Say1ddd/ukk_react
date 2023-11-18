@@ -2,11 +2,9 @@ import { useEffect } from 'react';
 import Checkbox from '@/Components/Checkbox';
 import AuthLayout from '@/Layouts/AuthLayout';
 import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
-import Welcome from './../Welcome';
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -31,7 +29,7 @@ export default function Login({ status, canResetPassword }) {
         <AuthLayout image="login">
             <Head title="Log in" />
 
-            <div className='text-center text-2xl text-gray-700 mb-6'>Welcome Back!</div>
+            <div className='text-center text-2xl text-gray-700 mb-6'>Selamat datang!</div>
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
@@ -75,7 +73,7 @@ export default function Login({ status, canResetPassword }) {
                             checked={data.remember}
                             onChange={(e) => setData('remember', e.target.checked)}
                         />
-                        <span className="ms-2 text-sm text-gray-600">Remember Me</span>
+                        <span className="ms-2 text-sm text-gray-600">Ingat saya</span>
                     </label>
                 </div>
 
@@ -89,7 +87,7 @@ export default function Login({ status, canResetPassword }) {
                             href={route('password.request')}
                             className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            Forgot Password?
+                            Lupa password?
                         </Link>
                     )}
                 </div>
