@@ -13,9 +13,9 @@ class BarangMasukController extends Controller
      */
     public function index()
     {
-        $barangMasuks = BarangMasuk::latest()->get();
+        $barangmasuks = BarangMasuk::with('barang')->latest()->paginate(10);
         return Inertia::render('BarangMasuk/Index', [
-            'barangMasuks' => $barangMasuks
+            'barangmasuks' => $barangmasuks,
         ]);
     }
 

@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('barang', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
-            $table->string('merk', 50)->nullable();
-            $table->string('seri', 50)->nullable();
+            $table->string('gambar')->nullable();
+            $table->string('merk', 50);
+            $table->string('seri', 255)->unique();
             $table->text('spesifikasi')->nullable();
-            $table->smallInteger('stok');
-            $table->foreignId('kategori_id')->cascadeOnDelete();
+            $table->smallInteger('stok')->default(0);
+            $table->foreignId('kategori_id')->cascadeOnUpdate()->restrictOnDelete();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('barangs');
+        Schema::dropIfExists('barang');
     }
 };

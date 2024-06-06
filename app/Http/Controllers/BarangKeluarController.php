@@ -13,9 +13,9 @@ class BarangKeluarController extends Controller
      */
     public function index()
     {
-        $barangKeluars = BarangKeluar::latest()->get();
+        $barangkeluars = BarangKeluar::with('barang')->latest()->get();
         return Inertia::render('BarangKeluar/Index', [
-            'barangKeluars' => $barangKeluars
+            'barangkeluars' => $barangkeluars,
         ]);
     }
 

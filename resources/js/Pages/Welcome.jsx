@@ -69,7 +69,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 >
                                     <div
                                         id="screenshot-container"
-                                        className="relative flex w-full flex-1 items-stretch"
+                                        className="relative flex w-full flex-1"
                                     >
                                         <img
                                             src="https://laravel.com/assets/img/welcome/docs-light.svg"

@@ -27,9 +27,10 @@ export default function Register() {
     };
 
     return (
-        <AuthLayout>
+        <AuthLayout image="register">
             <Head title="Register" />
 
+            <div className='text-center text-xl font-semibold text-gray-700'>Buat akun baru</div>
             <form onSubmit={submit}>
                 <div>
                     <InputLabel htmlFor="name" value="Name" />

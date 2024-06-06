@@ -10,6 +10,7 @@ class Kategori extends Model
     protected $table = 'kategori';
 
     protected $fillable = [
+        'slug',
         'deskripsi',
         'kategori',
     ];

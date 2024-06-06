@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('kategori', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
-            $table->string('deskripsi', 100)->nullable();
-            $table->enum('kategori', ['M', 'A', 'BHP', 'BTHP'])->nullable();
+            $table->string('deskripsi', 255)->nullable();
+            $table->string('kategori')->unique();
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kategoris');
+        Schema::dropIfExists('kategori');
     }
 };

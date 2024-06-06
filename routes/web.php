@@ -23,11 +23,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('kategori', KategoriController::class);
-    Route::resource('barang', BarangController::class);
-    Route::resource('barangMasuk', BarangMasukController::class);
-    Route::resource('barangKeluar', BarangKeluarController::class);
-
+    Route::resource('kategori', KategoriController::class)->parameter('kategori', 'kategori:slug');
+    Route::resource('barang', BarangController::class)->parameter('barang', 'barang:slug');
+    Route::resource('barangmasuk', BarangMasukController::class);
+    Route::resource('barangkeluar', BarangKeluarController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

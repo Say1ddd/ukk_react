@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Barang;
+use App\Models\Kategori;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
@@ -13,9 +15,9 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $barangs = Barang::latest()->get();
+        $barangs = Barang::with('kategori')->latest()->get();
         return Inertia::render('Barang/Index', [
-            'barangs' => $barangs
+            'barangs' => $barangs,
         ]);
     }
 
@@ -24,7 +26,11 @@ class BarangController extends Controller
      */
     public function create()
     {
-        //
+        $kategoris = Kategori::get();
+
+        return Inertia::render('Barang/Create', [
+            'kategoris' => $kategoris
+        ]);
     }
 
     /**
@@ -32,7 +38,31 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'merk' => ['required', 'max:255', 'unique:barang,merk'],
+            'gambar' => ['nullable', 'image', 'max:1024', 'mimes:jpg,jpeg,png'],
+            'seri' => ['required', 'max:255', 'unique:barang,seri'],
+            'spesifikasi' => ['nullable'],
+            'stok' => ['required', 'numeric', 'min:0'],
+            'kategori_id' => ['required', 'exists:kategori,id'],
+        ]);
+
+        $gambar = $request->file('gambar');
+        $gambar->storeAs('public/barang', $gambar->hashName());
+
+        $slug = Str::slug($request->seri);
+
+        Barang::create([
+            'merk' => $request->merk,
+            'gambar' => $gambar->hashName(),
+            'slug' => $slug,
+            'seri' => $request->seri,
+            'spesifikasi' => $request->spesifikasi,
+            'stok' => $request->stok,
+            'kategori_id' => $request->kategori_id,
+        ]);
+
+        return redirect()->route('barang.index');
     }
 
     /**
@@ -40,7 +70,12 @@ class BarangController extends Controller
      */
     public function show(Barang $barang)
     {
-        //
+        $kategori = $barang->kategori;
+
+        return Inertia::render('Barang/Show', [
+            'barang' => $barang,
+            'kategori' => $kategori,
+        ]);
     }
 
     /**
@@ -48,7 +83,12 @@ class BarangController extends Controller
      */
     public function edit(Barang $barang)
     {
-        //
+        $kategoris = Kategori::get();
+
+        return Inertia::render('Barang/Edit', [
+            'barang' => $barang,
+            'kategoris' => $kategoris,
+        ]);
     }
 
     /**
@@ -56,7 +96,18 @@ class BarangController extends Controller
      */
     public function update(Request $request, Barang $barang)
     {
-        //
+        $request->validate([
+            'merk' => 'required',
+            'slug' => 'required',
+            'seri' => 'required',
+            'spesifikasi' => 'required',
+            'stok' => 'required',
+            'kategori_id' => 'required',
+        ]);
+
+        $barang->update($request->all());
+
+        return redirect()->route('barang.index');
     }
 
     /**
@@ -64,6 +115,8 @@ class BarangController extends Controller
      */
     public function destroy(Barang $barang)
     {
-        //
+        $barang->delete();
+
+        return redirect()->route('barang.index');
     }
 }
