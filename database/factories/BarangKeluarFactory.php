@@ -18,8 +18,8 @@ class BarangKeluarFactory extends Factory
     {
         return [
             'tanggal_keluar' => now(),
-            'jumlah' => 1,
-            'barang_id' => rand(1, 10),
+            'jumlah' => 10,
+            'barang_id' => 1
         ];
     }
 }

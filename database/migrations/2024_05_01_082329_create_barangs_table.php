@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('merk', 50);
             $table->string('seri', 255)->unique();
             $table->text('spesifikasi')->nullable();
-            $table->smallInteger('stok')->default(0);
-            $table->foreignId('kategori_id')->cascadeOnUpdate()->restrictOnDelete();
+            $table->unsignedSmallInteger('stok')->default(0);
+            $table->foreignId('kategori_id')->constrained('kategori')->cascadeOnUpdate()->restrictOnDelete();
             $table->timestamps();
         });
     }

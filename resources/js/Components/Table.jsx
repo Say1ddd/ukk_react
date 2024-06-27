@@ -16,9 +16,9 @@ const Head = ({ children }) => {
   )
 }
 
-const Title = ({ value }) => {
+const Title = ({ value, colSpan }) => {
   return (
-    <th className="border p-2">{value}</th>
+    <th className="border p-2" colSpan={colSpan}>{value}</th>
   )
 }
 
@@ -32,9 +32,9 @@ const Body = ({ children }) => {
   )
 }
 
-const Content = ({ value }) => {
+const Content = ({ value, className='', colSpan }) => {
     return (
-        <td className="border p-2">{value}</td>
+        <td className={`border p-2` + className} colSpan={colSpan}>{value}</td>
     )
 }
 
